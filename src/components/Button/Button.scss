@@ -1,0 +1,25 @@
+.button {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background-color: Transparent;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.prev {
+  background-image: url(./icons/left.svg);
+}
+
+.next {
+  background-image: url(./icons/right.svg);
+}
+
+.submit {
+  background-image: url(./icons/submit.svg);
+}
+
+.loading {
+  background-image: url(./icons/loading.svg);
+}

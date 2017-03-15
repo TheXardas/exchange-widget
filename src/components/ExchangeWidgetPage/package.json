@@ -1,0 +1,6 @@
+{
+  "name": "ExchangeWidgetPage",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ExchangeWidgetPage.jsx"
+}

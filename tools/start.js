@@ -30,13 +30,18 @@ async function start() {
     // Плагин, который рестартует сервер каждый раз, когда заканчивается пересборка webpack'а.
     // завязаться на 'done' недостаточно, потому что тогда браузер обновляется раньше, чем поднимается сервер,
     // в результате запросы к api падают с ошибками.
-    function RestartServerPlugin() {}
+    /*function RestartServerPlugin() {}
     RestartServerPlugin.prototype.apply = function apply(compiler) {
         compiler.plugin('after-emit', (compilation, callback) => {
-            const serv = runServer();
-            serv.then(() => callback());
+            try {
+
+                return serv.then(() => callback());
+            } catch (e) {
+              console.error(e);
+            }
+            callback();
         });
-    };
+    };*/
 
     // Hot Module Replacement (HMR) + React Hot Reload
     if (isDebug) {
@@ -51,7 +56,7 @@ async function start() {
       query.plugins = ['react-hot-loader/babel'].concat(query.plugins || []);
       clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
       clientConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
-      clientConfig.plugins.push(new RestartServerPlugin());
+      //clientConfig.plugins.push(new RestartServerPlugin());
     }
 
     const bundler = webpack(webpackConfig);
@@ -73,6 +78,8 @@ async function start() {
         if (serverStarted || stats.stats[1].compilation.errors.length) {
             return;
         }
+
+          const serv = runServer();
 
         serverStarted = true;
         const app = express();

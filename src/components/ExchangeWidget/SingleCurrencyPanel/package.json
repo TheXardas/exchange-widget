@@ -1,0 +1,6 @@
+{
+  "name": "SingleCurrencyPanel",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SingleCurrencyPanel.jsx"
+}

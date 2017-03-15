@@ -68,7 +68,7 @@ const config = {
         },
       },
       {
-        test: /\.css/,
+        test: /\.s?css/,
         use: [
           {
             loader: 'isomorphic-style-loader',

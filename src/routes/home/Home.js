@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
+import ExchangeWidgetPage from '../../components/ExchangeWidgetPage';
+
+import s from './Home.scss';
+
 
 class Home extends React.Component {
 
@@ -9,6 +12,7 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>Hello</h1>
+            <ExchangeWidgetPage rates={this.props.rates} />
         </div>
       </div>
     );

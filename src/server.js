@@ -3,7 +3,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt from 'express-jwt';
-import jwt from 'jsonwebtoken';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
@@ -15,6 +14,8 @@ import errorPageStyle from './routes/error/ErrorPage.css';
 import routes from './routes';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import { port, auth } from './config';
+import config from '../config';
+import apiMiddleware from './util/apiMiddleware';
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(config.api.xhrPath, apiMiddleware);
 
 //
 // Authentication
@@ -101,6 +104,11 @@ app.get('*', async (req, res, next) => {
 const pe = new PrettyError();
 pe.skipNodeFiles();
 pe.skipPackage('express');
+pe.appendStyle({
+    'pretty-error > header > message': {
+        color: 'red',
+    },
+});
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
