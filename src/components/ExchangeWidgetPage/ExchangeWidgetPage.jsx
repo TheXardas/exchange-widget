@@ -58,6 +58,7 @@ export default class ExchangeWidgetPage extends React.Component {
         this.setState({isLoading: true});
 
         const rates = loadExchangeRates().then((rates) => {
+            // TODO detect current input focus, and perform conversion for blurred input
             this.setState({
                 rates,
                 isLoading: false,
@@ -92,6 +93,7 @@ export default class ExchangeWidgetPage extends React.Component {
     onSubmit = (operation) => {
         // TODO submit operation.
         console.log(operation);
+        alert('Submit following operation: ' + JSON.stringify(operation));
     };
 
     render() {
