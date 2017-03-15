@@ -19,10 +19,10 @@ class SingleCurrencyPanel extends React.Component {
 
     setPreviousCurrency = () => {
         const currencyAliases = Object.keys(this.props.rates);
-        const currentCurrencyIndex = currencyAliases.indexOf(this.props.currency.alias);
-        let newCurrencyIndex = 0;
-        if (currencyAliases.length - 1 !== currentCurrencyIndex) {
-            newCurrencyIndex = currentCurrencyIndex + 1;
+        const currentCurrencyIndex = currencyAliases.indexOf(this.props.currency);
+        let newCurrencyIndex = currentCurrencyIndex + 1;
+        if (currencyAliases.length === newCurrencyIndex) {
+            newCurrencyIndex = 0;
         }
         const newCurrency = currencyAliases[newCurrencyIndex];
         this.changeCurrency(newCurrency);
@@ -31,9 +31,9 @@ class SingleCurrencyPanel extends React.Component {
     setNextCurrency = () => {
         const currencyAliases = Object.keys(this.props.rates);
         const currentCurrencyIndex = currencyAliases.indexOf(this.props.currency);
-        let newCurrencyIndex = currencyAliases.length - 1;
-        if (0 !== currentCurrencyIndex) {
-            newCurrencyIndex = currentCurrencyIndex - 1;
+        let newCurrencyIndex = currentCurrencyIndex - 1;
+        if (-1 === newCurrencyIndex) {
+            newCurrencyIndex = currencyAliases.length - 1;
         }
         const newCurrency = currencyAliases[newCurrencyIndex];
         this.changeCurrency(newCurrency);
